@@ -7,6 +7,9 @@ export const Container = styled.button `
   margin: 1px;
   border: 1px rgba(0,0,0,.2) solid;
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
 
   span{
     position: absolute;
@@ -21,10 +24,7 @@ export const Container = styled.button `
 `;
 
 export const Arrow = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,.7);
+  width: 50%;
+  height: 25px;
+  background-color: ${props => props.color};
 `;

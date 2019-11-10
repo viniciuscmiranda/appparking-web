@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 const size = '532px';
 
-export const Container = styled.div`
+export const Container = styled.div` 
     width: ${size};
     height: ${size};
     position: absolute;
 	transform: translate(-50%, -50%);
 	top: 50%;
 	left: 50%;
+    border: 2px black solid;
     overflow: auto;
 `;
 

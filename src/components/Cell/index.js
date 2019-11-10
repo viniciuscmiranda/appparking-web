@@ -4,12 +4,12 @@ import {Container, Arrow} from './style';
 export default function Cell({cellData, findPath}) {
   if(cellData) {
     const {type, status, path} = cellData;
-    const bg = {nm: 'darkgreen', id: 'darkblue', df: 'darkred', st: 'orange', path: 'transparent'};
+    const bg = {nm: 'black', id: 'black', df: 'black', st: 'orange', path: 'transparent'};
+    const cs = ['red', 'blue', 'green', 'yellow', 'transparent'];    
 
     return(
       <Container bg={bg[type]} onClick={() => findPath()}>
-        <span>{type}</span>
-        {path && (<Arrow path={path}/>)}
+        {path && path.map((p,i) => {if(p) return (<Arrow key={i} color={cs[i]}/>); else return (<Arrow key={i} color={cs[cs.length-1]}/>)})}
       </Container>
     )
 
