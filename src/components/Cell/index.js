@@ -2,18 +2,30 @@ import React from 'react';
 import {Container, Arrow} from './style';
 
 export default function Cell({cellData, findPath}) {
-  if(cellData) {
-    const {type, status, path} = cellData;
-    const bg = {nm: 'black', id: 'black', df: 'black', st: 'orange', path: 'transparent'};
-    const cs = ['red', 'blue', 'green', 'yellow', 'transparent'];    
+    if (cellData) {
+        const {type, status, path} = cellData;
+        const baseSrc = '../../../assets/images/';
 
-    return(
-      <Container bg={bg[type]} onClick={() => findPath()}>
-        {path && path.map((p,i) => {if(p) return (<Arrow key={i} color={cs[i]}/>); else return (<Arrow key={i} color={cs[cs.length-1]}/>)})}
-      </Container>
-    )
+        const colors = {
+            'oc': 'red',
+            'vg': 'green',
+            'st': 'orange',
+            'ou': 'darkgray'
+        }
 
-  } 
-  
-  return <Container/>
+        const foregrounds = {
+            'id': 'idoso.png',
+            'df': 'deficiente.png',
+            'nm': 'normal.png',
+        };
+
+        return (
+            <Container color={colors[status]} onClick={() => findPath()}>
+              {type && <img src={baseSrc + '/' + foregrounds[type]}/>}
+              {path && path.active && <Arrow path={path} />}
+            </Container>
+        )
+    }
+
+    return <Container/>
 }
