@@ -17,8 +17,8 @@ export default function ParkingLot() {
                 lot_y: 3
             }, {
                 status: 'st',
-                lot_x: 1,
-                lot_y: 1
+                lot_x: 7,
+                lot_y: 7
             },{
                 status: 'oc',
                 type: 'id',
@@ -96,6 +96,7 @@ export default function ParkingLot() {
         for (let i = 0; i < 4; i++) {
             let startCell = cellsCopy.filter(c => c.status === 'st')[0];
             
+            const passed = [];
             for (let i2 = 0; i2 < (park.xsize + park.ysize); i2++) {
                 const cell = (() => {
                     const directions = cellsCopy.filter(d => 
@@ -120,15 +121,18 @@ export default function ParkingLot() {
 
                     return (()=>{
                         const newCell = directions.sort((a,b) => {
-                            return a.dist > b.dist ? a : b;
-                        })
-                        console.log(newCell);
+                            return a.dist < b.dist ? -1 : 1;
+                        });
                         
-                        //if(newCell.path.passed.filter(f => f.lot_x === newCell.lot_x && f.lot_y === newCell.lot_y )){
-                            
-                            
-                        //}
-                        return directions.filter(d => d.dist <= Math.min(...distances))[0];
+                        /*const ccc = newCell.filter(nc => {
+                            return startCell.path && 
+                            !startCell.path.passed.includes(
+                                {lot_x: nc.lot_x, lot_y: nc.logt_y}
+                            );
+                        })[0]; */
+                                               
+
+                        return newCell[0];
                     })();
                 })();
                 
@@ -137,7 +141,8 @@ export default function ParkingLot() {
                         i2 = Infinity;
                         cell.path.found=true;
                 }
-                cell.path.passed.push({lot_x: cell.lot_x, lot_y: cell.lot_y});
+                passed.push({lot_x: cell.lot_x, lot_y: cell.lot_y})
+                cell.path.passed = passed;
                 startCell = cell;
             }
         }
